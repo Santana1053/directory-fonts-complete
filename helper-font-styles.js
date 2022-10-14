@@ -1,3 +1,3 @@
 module.exports = {
-	"[-_\\s]italic|oblique|slant": "italic"
+	"[-_\\s]?italic|oblique|slant": "italic"
 };

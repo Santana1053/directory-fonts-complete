@@ -16,7 +16,7 @@ function getNormalizedFontFamilyByLangData(langData) {
 
 	if (hasLangDataKeys) {
 		var lastIndex = langData[1].lastIndexOf(langData[2]);
-		var unsubbedFontName = lastIndex === -1 ? langData[1] : langData[1].slice(0, lastIndex);
+		var unsubbedFontName = lastIndex === -1 ? langData[16] || langData[1] : langData[1].slice(0, lastIndex);
 
 		var spacedFontName = unsubbedFontName.replace(/([A-z0-9])([A-Z][a-z])/g, '$1 $2').replace(/([A-z0-9])([A-Z][a-z])/g, '$1 $2').replace(/([a-z0-9])([A-Z])$/g, '$1 $2');
 		var trimmedFontName = spacedFontName.replace(/^[^A-z0-9]+|[^A-z0-9]+$/g, '');
@@ -50,9 +50,9 @@ function getNormalizedFontStyleByLangData(langData) {
 }
 
 function getNormalizedFontWeightByLangData(langData) {
-	if (2 in langData) {
+	if (4 in langData) {
 		for (regex in fontWeights) {
-			if (langData[2].toLowerCase().match(regex)) return fontWeights[regex];
+			if (langData[4].toLowerCase().match(regex)) return fontWeights[regex];
 		}
 	}
 
