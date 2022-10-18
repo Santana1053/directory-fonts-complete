@@ -6,7 +6,7 @@ var isOtf = require('is-otf');
 var isTtf = require('is-ttf');
 var isWoff = require('is-woff');
 var isWoff2 = require('is-woff2');
-var decompress = require('brotli/decompress');
+var woff2 = require('woff2');
 var opentype = require('./helper-opentype.js');
 var path = require('path');
 var utf8decode = require('./helper-utf8decode.js');
@@ -63,9 +63,9 @@ function addFontToFoundryByPath(foundry, resolvedFilePath, relativeFilePath, swa
 	var buffer = fs.readFileSync(resolvedFilePath);
   var fontFormat = getNormalizedFontFormatByBuffer(buffer);
 	if (fontFormat) {
-    // if (fontFormat === 'woff2') {
-    //   buffer = decompress(buffer);
-    // }
+    if (fontFormat === 'woff2') {
+      buffer = woff2.decode(buffer);
+    }
 
     var rawData = opentype.parse(buffer.buffer);
 		var nameData = rawData && rawData.tables && rawData.tables.name;
