@@ -50,6 +50,11 @@ function getNormalizedFontStyleByLangData(langData) {
 }
 
 function getNormalizedFontWeightByLangData(langData) {
+	if (17 in langData) {
+		for (regex in fontWeights) {
+			if (langData[17].toLowerCase().match(regex)) return fontWeights[regex];
+		}
+	}
 	if (4 in langData) {
 		for (regex in fontWeights) {
 			if (langData[4].toLowerCase().match(regex)) return fontWeights[regex];
